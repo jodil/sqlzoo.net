@@ -5,6 +5,9 @@ http://sqlzoo.net/wiki/Neeps_medium_questions
 
 Answers
 =======
+
+Medium Questions:
+
 6) SELECT count(student), event FROM attends WHERE event LIKE '%co72010.%'
 7) SELECT count(staff), event FROM teaches WHERE event LIKE '%co7%' GROUP BY event
 8) SELECT temp.modle, count(temp.cnt)
@@ -18,6 +21,10 @@ GROUP BY temp.modle HAVING count(temp.cnt) < 10
 FROM event 
 INNER JOIN (SELECT dow,tod FROM event WHERE modle LIKE '%co72010%') as event2 ON event.dow=event2.dow AND event.tod=event2.tod
 WHERE event.modle NOT LIKE '%co72010%'
+
+
+Hard Questions:
+
 11) select teaches.staff,teaches.event,event.dow,event.tod
 FROM teaches
 INNER JOIN event ON event.id=teaches.event
