@@ -1,0 +1,28 @@
+Questions 
+=========
+http://sqlzoo.net/wiki/Neeps_medium_questions
+
+
+Answers
+=======
+6) SELECT count(student), event FROM attends WHERE event LIKE '%co72010.%'
+7) SELECT count(staff), event FROM teaches WHERE event LIKE '%co7%' GROUP BY event
+8) SELECT temp.modle, count(temp.cnt)
+FROM
+(SELECT occurs.event as event,modle.name modle,count(occurs.week) as cnt
+FROM occurs
+INNER JOIN modle ON modle.id = SUBSTRING_INDEX(occurs.event, '.', 1)
+GROUP BY SUBSTRING_INDEX(occurs.event, '.', 1),event) as temp 
+GROUP BY temp.modle HAVING count(temp.cnt) < 10
+9) SELECT event.id,event.dow,event.tod 
+FROM event 
+INNER JOIN (SELECT dow,tod FROM event WHERE modle LIKE '%co72010%') as event2 ON event.dow=event2.dow AND event.tod=event2.tod
+WHERE event.modle NOT LIKE '%co72010%'
+11) select teaches.staff,teaches.event,event.dow,event.tod
+FROM teaches
+INNER JOIN event ON event.id=teaches.event
+INNER JOIN (select teaches.staff,teaches.event,event.dow,event.tod
+FROM teaches
+INNER JOIN event ON event.id=teaches.event
+WHERE teaches.staff LIKE '%co.ACg%') as tacg ON event.dow = tacg.dow
+WHERE teaches.staff LIKE '%co.CHt%' GROUP BY teaches.event
